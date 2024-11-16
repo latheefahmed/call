@@ -15,7 +15,7 @@ client = Client(account_sid, auth_token)
 twilio_bin_url = 'https://handler.twilio.com/twiml/EH331b110fb7c872147663d7532f9dc068'
 
 # Load data
-data_path = 'C:\\Users\\csasw\\OneDrive\\Desktop\\1\\Statement8_Dataset.csv'
+data_path = 'Statement8_Dataset.csv'
 if os.path.exists(data_path):
     data = pd.read_csv(data_path)
 else:
