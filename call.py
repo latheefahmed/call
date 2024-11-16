@@ -6,10 +6,10 @@ import os
 app = Flask(__name__)
 
 # Twilio configuration
-account_sid = 'ACa79ed342809147dfff710c535b55f514'
-auth_token = '71214d1d089a070591d019b6044e2d5c'
-twilio_phone_number = '+12258004560'
-twilio_bin_url = 'https://handler.twilio.com/twiml/EHfbb44bc41bc956a69884bc2eca44db1c'
+account_sid = os.getenv('account_sid')
+auth_token = os.getenv('auth_token')
+twilio_phone_number = os.getenv('twilio_phone_number')
+twilio_bin_url = os.getenv('twilio_bin_url')
 client = Client(account_sid, auth_token)
 
 # Load dataset
