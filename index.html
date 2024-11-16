@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Call Notification</title>
+    <style>
+        /* General Body Style */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e6f2ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 24px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background-color: #4CAF50;
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #2ed31c;
+            color: #4CAF50;
+        }
+
+        /* Container for the Content */
+        .container {
+            max-width: 500px;
+            width: 100%;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Text */
+        h1 {
+            text-align: center;
+            color: #33a344;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 16px;
+            width: 100%;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: #33a344;
+        }
+
+        /* Result Section Styling */
+        #result {
+            margin-top: 20px;
+        }
+
+        /* Paragraph Style for Each Message */
+        p {
+            background: #f0f8ff;
+            padding: 12px;
+            border: 1px solid #b3d7ff;
+            border-radius: 6px;
+            color: #003366;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        /* Footer Style */
+        footer {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            padding: 10px 0;
+            color: white;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Responsive Design for Mobile Devices */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        PUBLIC DISTRIBUTION SYSTEM
+    </header>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="#">Citizen Login</a>
+        <a href="#">Department Login</a>
+        <a href="#">Reports</a>
+        <a href="#">Services</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Send Call Notification</h1>
+        <button onclick="sendCall()">Send Call</button>
+        <div id="result"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 TN PDS Portal
+    </footer>
+
+    <script>
+        function sendCall() {
+            fetch('/send-calls', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = ''; // Clear previous results
+                data.forEach(message => {
+                    const p = document.createElement('p');
+                    p.textContent = message;
+                    resultDiv.appendChild(p);
+                });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+Flask==3.0.0
+pandas==2.1.2  # If you're using pandas for the dataset

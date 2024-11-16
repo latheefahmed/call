@@ -1,0 +1,8 @@
+﻿RationCardNumber,MemberName,Cardholder,Gender,Age,DOB,RelationToCardHolder,NumberOfFamilyMembers,Address,Category,RationCardType,PhoneNumber
+RC312187,Sridharan,Sridharan,Male,44,########,Self,4,#######,APL,Green Card,+919500561304
+RC312187,Hemavathy,Sridharan,Female,43,########,Spouse,4,#######,APL,Green Card,+919840023677
+RC312187,Aswin,Sridharan,Male,19,########,Son,4,#######,APL,Green Card,+919500561304
+RC312187,Kirthika Sri,Sridharan,Female,15,########,Daughter,4,#######,APL,Green Card,nil
+RC575607,Ramanujam,Ramanujam,Male,75,########,Self,1,#######,APL,Green Card,+919840023677
+RC390472,Jagadeesan,Saraswathy,Male,78,########,Husband,2,#######,APL,Green Card,+919043619456
+RC390472,Saraswathy,Saraswathi,Female,76,########,Self,2,#######,APL,Green Card,nil
