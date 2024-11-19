@@ -3,144 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send Call Notification</title>
+    <title>Public Distribution System</title>
     <style>
+        /* General Body Style */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #e6f2ff;
             margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
-        header, footer {
+        /* Header Style */
+        header {
             background-color: #4CAF50;
             color: white;
-            text-align: center;
             padding: 20px;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        nav {
-            background-color: #4CAF50;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            flex-shrink: 0;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 14px 20px;
-            font-size: 16px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        nav a:hover {
-            background-color: #2ed31c;
-            color: #4CAF50;
-            border-radius: 6px;
-        }
-
-        .container {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
             text-align: center;
-        }
-
-        h1 {
-            color: #4CAF50;
-            margin-bottom: 20px;
             font-size: 28px;
         }
 
+        /* Container for the Content */
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex: 1; /* Push the footer to the bottom */
+        }
+
+        /* Header Text */
+        h1 {
+            color: #33a344;
+            font-size: 30px; /* Increased size for header text */
+            margin-bottom: 40px;
+        }
+
+        /* Button Styling */
         button {
+            display: block; /* Stack buttons vertically */
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 20px 32px; /* Increased padding for larger buttons */
             cursor: pointer;
-            border-radius: 8px;
-            font-size: 18px;
-            margin: 10px 0;
-            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 10px; /* Slightly rounder edges */
+            font-size: 24px; /* Larger font size */
+            margin: 20px auto; /* Center buttons with spacing */
+            width: 80%; /* Wider buttons for better proportion */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
         }
 
         button:hover {
-            background-color: #33a344;
-            transform: scale(1.05);
+            background-color: #2e7d32; /* Darker shade for hover effect */
+            transform: scale(1.1); /* Slight enlargement on hover */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow for hover effect */
         }
 
+        /* Result Section Styling */
         #result {
-            margin-top: 20px;
-            overflow-y: auto;
-            max-height: 300px;
-            width: 100%;
+            margin-top: 30px;
         }
 
+        /* Paragraph Style for Each Message */
         p {
             background: #f0f8ff;
-            padding: 10px;
+            padding: 15px;
             border: 1px solid #b3d7ff;
-            border-radius: 8px;
+            border-radius: 6px;
             color: #003366;
             font-size: 16px;
             margin: 5px 0;
-            text-align: left;
         }
 
-        footer {
+        /* Loading Indicator */
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #003366;
             font-size: 18px;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 24px;
-            }
-
-            button {
-                font-size: 16px;
-                padding: 12px 24px;
-            }
-
-            p {
-                font-size: 14px;
-            }
+        /* Footer Style */
+        footer {
+            text-align: center;
+            font-size: 16px;
+            color: #777;
+            background-color: #4CAF50;
+            padding: 10px 0;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <header>PUBLIC DISTRIBUTION SYSTEM</header>
-    <nav>
-        <a href="#">Citizen Login</a>
-        <a href="#">Department Login</a>
-        <a href="#">Reports</a>
-        <a href="#">Services</a>
-    </nav>
+
+    <!-- Header -->
+    <header>
+        PUBLIC DISTRIBUTION SYSTEM
+    </header>
+
+    <!-- Main Content -->
     <div class="container">
-        <h1>Send Call Notifications</h1>
-        <button onclick="sendCall()">Send Call</button>
+        <h1>Notifications</h1>
+        <button onclick="sendCall()" aria-label="Send call notifications to eligible citizens">Send Call Notification</button>
+        <button onclick="sendMessage()" aria-label="Send SMS notifications to eligible citizens">Send SMS Notification</button>
+        <div id="loading">Loading, please wait...</div>
         <div id="result"></div>
     </div>
-    <footer>© 2024 TN PDS Portal</footer>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 TN PDS Portal
+    </footer>
+
     <script>
+        // Function to send call notifications
         function sendCall() {
+            const resultDiv = document.getElementById('result');
+            const loadingDiv = document.getElementById('loading');
+            resultDiv.innerHTML = ''; // Clear previous results
+            loadingDiv.style.display = 'block'; // Show loading indicator
+
             fetch('/send-calls', {
                 method: 'POST',
                 headers: {
@@ -149,8 +138,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                const resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = '';
+                loadingDiv.style.display = 'none'; // Hide loading indicator
+                resultDiv.innerHTML = '<h2>Call Notifications</h2>'; // Title for results
                 data.forEach(message => {
                     const p = document.createElement('p');
                     p.textContent = message;
@@ -158,9 +147,42 @@
                 });
             })
             .catch((error) => {
+                loadingDiv.style.display = 'none'; // Hide loading indicator
+                resultDiv.innerHTML = `<p style="color: red;">An error occurred: ${error.message}</p>`;
+                console.error('Error:', error);
+            });
+        }
+
+        // Function to send SMS notifications
+        function sendMessage() {
+            const resultDiv = document.getElementById('result');
+            const loadingDiv = document.getElementById('loading');
+            resultDiv.innerHTML = ''; // Clear previous results
+            loadingDiv.style.display = 'block'; // Show loading indicator
+
+            fetch('/send-messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingDiv.style.display = 'none'; // Hide loading indicator
+                resultDiv.innerHTML = '<h2>SMS Notifications</h2>'; // Title for results
+                data.forEach(message => {
+                    const p = document.createElement('p');
+                    p.textContent = message;
+                    resultDiv.appendChild(p);
+                });
+            })
+            .catch((error) => {
+                loadingDiv.style.display = 'none'; // Hide loading indicator
+                resultDiv.innerHTML = `<p style="color: red;">An error occurred: ${error.message}</p>`;
                 console.error('Error:', error);
             });
         }
     </script>
+
 </body>
 </html>
