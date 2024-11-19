@@ -99,7 +99,7 @@ def send_messages_to_update_spouse_name():
                 if has_spouse:
                     try:
                         message = client.messages.create(
-                            to='+916381552188',
+                            to=phone_number,
                             from_=twilio_phone_number,
                             body=f"Hello {head_name}, This is to inform you that please update the head of your household to your spouse.Visit the portal to update:https://tnpds.gov.in/"
                         )
