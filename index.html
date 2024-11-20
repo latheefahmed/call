@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Public Distribution System</title>
     <style>
-        /* General Body Style */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #e6f2ff;
@@ -15,7 +14,6 @@
             min-height: 100vh;
         }
 
-        /* Header Style */
         header {
             background-color: #4CAF50;
             color: white;
@@ -24,7 +22,6 @@
             font-size: 28px;
         }
 
-        /* Container for the Content */
         .container {
             max-width: 600px;
             width: 100%;
@@ -34,43 +31,42 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            flex: 1; /* Push the footer to the bottom */
+            flex: 1;
         }
 
-        /* Header Text */
         h1 {
             color: #33a344;
-            font-size: 30px; /* Increased size for header text */
+            font-size: 30px;
             margin-bottom: 40px;
         }
 
-        /* Button Styling */
+
         button {
-            display: block; /* Stack buttons vertically */
+            display: block; 
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 20px 32px; /* Increased padding for larger buttons */
+            padding: 20px 32px; 
             cursor: pointer;
-            border-radius: 10px; /* Slightly rounder edges */
-            font-size: 24px; /* Larger font size */
-            margin: 20px auto; /* Center buttons with spacing */
-            width: 80%; /* Wider buttons for better proportion */
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            border-radius: 10px;
+            font-size: 24px; 
+            margin: 20px auto; 
+            width: 80%; 
+            transition: all 0.3s ease; 
         }
 
         button:hover {
-            background-color: #2e7d32; /* Darker shade for hover effect */
-            transform: scale(1.1); /* Slight enlargement on hover */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow for hover effect */
+            background-color: #2e7d32; 
+            transform: scale(1.1); 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
         }
 
-        /* Result Section Styling */
+       
         #result {
             margin-top: 30px;
         }
 
-        /* Paragraph Style for Each Message */
+       
         p {
             background: #f0f8ff;
             padding: 15px;
@@ -81,7 +77,7 @@
             margin: 5px 0;
         }
 
-        /* Loading Indicator */
+        
         #loading {
             display: none;
             text-align: center;
@@ -90,7 +86,7 @@
             font-size: 18px;
         }
 
-        /* Footer Style */
+       
         footer {
             text-align: center;
             font-size: 16px;
@@ -103,12 +99,12 @@
 </head>
 <body>
 
-    <!-- Header -->
+   
     <header>
         PUBLIC DISTRIBUTION SYSTEM
     </header>
 
-    <!-- Main Content -->
+   
     <div class="container">
         <h1>Notifications</h1>
         <button onclick="sendCall()" aria-label="Send call notifications to eligible citizens">Send Call Notification</button>
@@ -117,18 +113,16 @@
         <div id="result"></div>
     </div>
 
-    <!-- Footer -->
     <footer>
         © 2024 TN PDS Portal
     </footer>
 
     <script>
-        // Function to send call notifications
         function sendCall() {
             const resultDiv = document.getElementById('result');
             const loadingDiv = document.getElementById('loading');
-            resultDiv.innerHTML = ''; // Clear previous results
-            loadingDiv.style.display = 'block'; // Show loading indicator
+            resultDiv.innerHTML = ''; 
+            loadingDiv.style.display = 'block';
 
             fetch('/send-calls', {
                 method: 'POST',
@@ -138,8 +132,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                loadingDiv.style.display = 'none'; // Hide loading indicator
-                resultDiv.innerHTML = '<h2>Call Notifications</h2>'; // Title for results
+                loadingDiv.style.display = 'none'; 
+                resultDiv.innerHTML = '<h2>Call Notifications</h2>'; 
                 data.forEach(message => {
                     const p = document.createElement('p');
                     p.textContent = message;
@@ -147,18 +141,18 @@
                 });
             })
             .catch((error) => {
-                loadingDiv.style.display = 'none'; // Hide loading indicator
+                loadingDiv.style.display = 'none'; 
                 resultDiv.innerHTML = `<p style="color: red;">An error occurred: ${error.message}</p>`;
                 console.error('Error:', error);
             });
         }
 
-        // Function to send SMS notifications
+       
         function sendMessage() {
             const resultDiv = document.getElementById('result');
             const loadingDiv = document.getElementById('loading');
-            resultDiv.innerHTML = ''; // Clear previous results
-            loadingDiv.style.display = 'block'; // Show loading indicator
+            resultDiv.innerHTML = ''; 
+            loadingDiv.style.display = 'block'; 
 
             fetch('/send-messages', {
                 method: 'POST',
@@ -168,8 +162,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                loadingDiv.style.display = 'none'; // Hide loading indicator
-                resultDiv.innerHTML = '<h2>SMS Notifications</h2>'; // Title for results
+                loadingDiv.style.display = 'none'; 
+                resultDiv.innerHTML = '<h2>SMS Notifications</h2>'; 
                 data.forEach(message => {
                     const p = document.createElement('p');
                     p.textContent = message;
@@ -177,7 +171,7 @@
                 });
             })
             .catch((error) => {
-                loadingDiv.style.display = 'none'; // Hide loading indicator
+                loadingDiv.style.display = 'none'; 
                 resultDiv.innerHTML = `<p style="color: red;">An error occurred: ${error.message}</p>`;
                 console.error('Error:', error);
             });
