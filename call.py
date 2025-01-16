@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 account_sid = os.getenv('account_sid')
 auth_token = os.getenv('auth_token')
-twilio_phone_number = '+12258004560'
+twilio_phone_number = '+16812532416'
 twilio_bin_url = os.getenv('twilio_bin_url')
 client = Client(account_sid, auth_token)
 
